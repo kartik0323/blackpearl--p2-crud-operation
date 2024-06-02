@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Management System</h1>
+    <form action="/add" method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="roll_no" placeholder="Roll No.">
+        <input type="text" name="marks" placeholder="Marks">
+        <button type="submit">Add User</button>
+    </form>
+    <hr>
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Roll No.</th>
+            <th>Marks</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.roll_no }}</td>
+                <td>{{ user.marks }}</td>
+                <td>
+                    <form action="/update/{{ user._id }}" method="post">
+                        <input type="text" name="new_username" placeholder="New Username">
+                        <input type="text" name="new_roll_no" placeholder="New Roll No.">
+                        <input type="text" name="new_marks" placeholder="New Marks">
+                        <button type="submit">Update</button>
+                    </form>
+                    <form action="/delete/{{ user._id }}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
